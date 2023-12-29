@@ -101,10 +101,10 @@ public class ParkingLotTest {
         parkingLot.registerEmptyObserver(owner);
 
         parkingLot.parkCar("ABC123", "John Doe");
-        assertFalse(parkingLot.isFull()); // Not full yet
+        assertFalse(parkingLot.isFull());
 
         parkingLot.unparkCar("ABC123");
-        assertTrue(parkingLot.getAvailableSpots() == 2); // Now it has space, should notify owner
+        assertTrue(parkingLot.getAvailableSpots() == 2);
     }
 
     @Test
@@ -113,10 +113,10 @@ public class ParkingLotTest {
         ParkingAttendant attendant = new ParkingAttendant();
 
         assertTrue(attendant.parkCar(parkingLot, "ABC123", "John Doe"));
-        assertFalse(parkingLot.isFull()); // Not full yet
+        assertFalse(parkingLot.isFull());
 
         assertTrue(attendant.parkCar(parkingLot, "XYZ789", "Jane Doe"));
-        assertTrue(parkingLot.isFull()); // Now it's full
+        assertTrue(parkingLot.isFull());
     }
 
     @Test
@@ -129,7 +129,7 @@ public class ParkingLotTest {
 
         assertEquals("John Doe", parkingLot.findCar("ABC123"));
         assertEquals("Jane Doe", parkingLot.findCar("XYZ789"));
-        assertNull(parkingLot.findCar("123XYZ")); // Car not found
+        assertNull(parkingLot.findCar("123XYZ"));
     }
 
     @Test
@@ -142,7 +142,7 @@ public class ParkingLotTest {
 
         assertNotNull(parkingLot.getParkingTimestamps().get("ABC123"));
         assertNotNull(parkingLot.getParkingTimestamps().get("XYZ789"));
-        assertNull(parkingLot.getParkingTimestamps().get("123XYZ")); // Car not found
+        assertNull(parkingLot.getParkingTimestamps().get("123XYZ"));
     }
 
     @Test
@@ -168,16 +168,16 @@ public class ParkingLotTest {
 
         ParkingAttendant attendant = new ParkingAttendant();
 
-        // Park cars to fill the first lot
+
         attendant.parkCar(parkingLots, "ABC123", "John Doe", false);
         attendant.parkCar(parkingLots, "XYZ789", "Jane Doe", false);
 
-        // Park large car, should go to the second lot with more free spaces
+
         assertTrue(attendant.parkCar(parkingLots, "DEF456", "Large Driver", true));
 
-        // Check the number of available spots in each lot
-        assertEquals(0, parkingLots.get(0).getAvailableSpots()); // First lot is full
-        assertEquals(2, parkingLots.get(1).getAvailableSpots()); // Second lot has 2 free spaces
+
+        assertEquals(0, parkingLots.get(0).getAvailableSpots());
+        assertEquals(2, parkingLots.get(1).getAvailableSpots());
     }
 
     @Test
@@ -188,16 +188,16 @@ public class ParkingLotTest {
 
         ParkingAttendant attendant = new ParkingAttendant();
 
-        // Park cars using the round-robin strategy
+
         attendant.parkCar(parkingLots, "ABC123", "John Doe", false);
         attendant.parkCar(parkingLots, "XYZ789", "Jane Doe", false);
 
-        // Park small car, should go to the first lot (round-robin)
+
         assertTrue(attendant.parkCar(parkingLots, "DEF456", "Small Driver", false));
 
-        // Check the number of available spots in each lot
-        assertEquals(0, parkingLots.get(0).getAvailableSpots()); // First lot is full
-        assertEquals(2, parkingLots.get(1).getAvailableSpots()); // Second lot has 2 free spaces
+
+        assertEquals(0, parkingLots.get(0).getAvailableSpots());
+        assertEquals(2, parkingLots.get(1).getAvailableSpots());
     }
     @Test
     public void testGetLocationOfParkedWhiteCars() {
@@ -296,7 +296,7 @@ public class ParkingLotTest {
         // Retrieve information about cars parked in the last 30 minutes
         Map<String, ParkingLot.CarInfo> carsParkedLast30Minutes = parkingLot.getInfoOfCarsParkedLast30Minutes();
 
-        // Check the information
+
         assertEquals(2, carsParkedLast30Minutes.size());
 
         ParkingLot.CarInfo carInfoABC123 = carsParkedLast30Minutes.get("ABC123");
@@ -307,6 +307,6 @@ public class ParkingLotTest {
         assertNotNull(carInfoDEF456);
         assertEquals("B1", carInfoDEF456.getLocation());
 
-        assertNull(carsParkedLast30Minutes.get("XYZ789")); // Parked 40 minutes ago
+        assertNull(carsParkedLast30Minutes.get("XYZ789"));
     }
 }

@@ -13,7 +13,7 @@ public class ParkingLot {
     private int availableSpots;
     private Map<String, String> parkedCars;
     private Map<String, Car> parkedCarsWithColor;
-    public Map<String, Long> parkingTimestamps; // Car Number -> Timestamp
+    public Map<String, Long> parkingTimestamps;
     private List<ParkingLotObserver> fullObservers;
     private List<ParkingLotObserver> emptyObservers;
 
@@ -38,7 +38,7 @@ public class ParkingLot {
     public boolean parkCar(String carNumber, String driverName) {
         if (availableSpots > 0) {
             parkedCars.put(carNumber, driverName);
-            parkingTimestamps.put(carNumber, System.currentTimeMillis()); // Store timestamp
+            parkingTimestamps.put(carNumber, System.currentTimeMillis());
             availableSpots--;
             notifyObservers();
             return true;
@@ -50,7 +50,7 @@ public class ParkingLot {
     public boolean parkCar(String carNumber, String driverName, String color, String make, String location, String plateNumber, String attendantName) {
         if (availableSpots > 0) {
             parkedCarsWithColor.put(carNumber, new Car(carNumber,driverName,color,make,location,plateNumber,attendantName));
-            parkingTimestamps.put(carNumber, System.currentTimeMillis()); // Store timestamp
+            parkingTimestamps.put(carNumber, System.currentTimeMillis());
             availableSpots--;
             notifyObservers();
             return true;

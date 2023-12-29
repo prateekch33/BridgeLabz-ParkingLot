@@ -6,7 +6,7 @@ import java.util.List;
 public class ParkingAttendant {
 
     public boolean parkCar(ParkingLot parkingLot, String carNumber, String driverName) {
-        // Simple logic for the parking attendant to park cars
+
         return parkingLot.parkCar(carNumber, driverName);
     }
 
@@ -17,7 +17,7 @@ public class ParkingAttendant {
             return false;
         }
 
-        // Use a round-robin strategy to evenly distribute cars among lots
+
         lastLotIndex = (lastLotIndex + 1) % parkingLots.size();
         ParkingLot chosenLot = parkingLots.get(lastLotIndex);
 
@@ -30,7 +30,7 @@ public class ParkingAttendant {
             return false;
         }
 
-        // Use the round-robin strategy for both large and small cars
+
         ParkingLot chosenLot = roundRobinLot(parkingLots);
 
         return chosenLot.parkCar(carNumber, driverName);
